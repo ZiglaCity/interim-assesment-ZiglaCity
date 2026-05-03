@@ -18,7 +18,8 @@ async function register(req, res) {
   const token = signToken(user);
   res.cookie("token", token, {
     httpOnly: true,
-    secure: false,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     maxAge: 1000 * 60 * 60 * 24 * 7,
   });
   res
@@ -37,7 +38,8 @@ async function login(req, res) {
   const token = signToken(user);
   res.cookie("token", token, {
     httpOnly: true,
-    secure: false,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     maxAge: 1000 * 60 * 60 * 24 * 7,
   });
   res.json({ user: { id: user._id, name: user.name, email: user.email } });
@@ -52,8 +54,8 @@ async function profile(req, res) {
 async function logout(req, res) {
   res.clearCookie("token", {
     httpOnly: true,
-    secure: false,
-    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
   });
   res.json({ message: "Logged out" });
 }
