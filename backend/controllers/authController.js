@@ -49,4 +49,13 @@ async function profile(req, res) {
   res.json({ user: req.user });
 }
 
-module.exports = { register, login, profile };
+async function logout(req, res) {
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: false,
+    sameSite: "lax",
+  });
+  res.json({ message: "Logged out" });
+}
+
+module.exports = { register, login, profile, logout };
