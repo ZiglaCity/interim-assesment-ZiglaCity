@@ -1,4 +1,4 @@
-# Solomons's Backend
+# Solomon's Backend
 
 ID: 22012447
 
