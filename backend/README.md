@@ -20,10 +20,17 @@ npm install
 npm run dev
 ```
 
+4. Seed the crypto collection with the frontend mock dataset:
+
+```bash
+npm run seed:crypto
+```
+
 API Endpoints
 
 - `POST /api/auth/register` — body: `{ name, email, password }`
 - `POST /api/auth/login` — body: `{ email, password }` (returns cookie `token`)
+- `POST /api/auth/logout` — clears the cookie session
 - `GET /api/auth/profile` — protected, returns user info
 
 - `GET /api/crypto` — list all cryptos
